@@ -1,7 +1,8 @@
-const express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
+import express from "express";
+import * as cryptos from "crypto-js";
+import bodyParser from "body-parser";
 
+const app = express();
 const PORT = 3000;
 const GITHUB_WEBHOOK_SECRET = "11223344"; // Debes reemplazar esto con tu secreto compartido
 
@@ -11,11 +12,12 @@ app.use(bodyParser.json());
 app.post("/github-webhook", (req, res) => {
   const headers = req.headers;
   const body = req.body;
-  console.log("first");
+  console.log(req);
   // Verificamos el secreto compartido (opcional pero recomendado)
   const receivedSignature = headers["x-hub-signature"];
-  const calculatedSignature = `sha1=${crypto
-    .createHmac("sha1", GITHUB_WEBHOOK_SECRET)
+
+  const calculatedSignature = `sha1=${cryptos
+    .HmacSHA1(GITHUB_WEBHOOK_SECRET)
     .update(JSON.stringify(body))
     .digest("hex")}`;
 
