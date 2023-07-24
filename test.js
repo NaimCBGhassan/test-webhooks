@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.post("/github-webhook", (req, res) => {
   const headers = req.headers;
   const body = req.body;
+
   console.log(req);
   // Verificamos el secreto compartido (opcional pero recomendado)
   const receivedSignature = headers["x-hub-signature"];
