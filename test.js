@@ -17,9 +17,8 @@ app.post("/github-webhook", (req, res) => {
   const receivedSignature = headers["x-hub-signature"];
 
   const calculatedSignature = `sha1=${crypto
-    .HmacSHA1(GITHUB_WEBHOOK_SECRET)
-    .update(JSON.stringify(body))
-    .digest("hex")}`;
+    .HmacSHA1(JSON.stringify(body), GITHUB_WEBHOOK_SECRET) // Se corrige el uso de HmacSHA1
+    .toString(crypto.enc.Hex)}`;
 
   if (receivedSignature !== calculatedSignature) {
     console.log("Error: Signatures do not match.");
