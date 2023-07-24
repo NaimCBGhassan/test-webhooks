@@ -1,5 +1,5 @@
 import express from "express";
-import * as cryptos from "crypto-js";
+import crypto from "crypto-js";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -16,7 +16,7 @@ app.post("/github-webhook", (req, res) => {
   // Verificamos el secreto compartido (opcional pero recomendado)
   const receivedSignature = headers["x-hub-signature"];
 
-  const calculatedSignature = `sha1=${cryptos
+  const calculatedSignature = `sha1=${crypto
     .HmacSHA1(GITHUB_WEBHOOK_SECRET)
     .update(JSON.stringify(body))
     .digest("hex")}`;
