@@ -1,15 +1,45 @@
 import express from "express";
 import crypto from "crypto-js";
 import bodyParser from "body-parser";
+import { exec } from "child_process";
 
+// Ruta del archivo shell a ejecutar
+const scriptPath = "./script.sh";
 const app = express();
 const PORT = 3000;
 const GITHUB_WEBHOOK_SECRET = "11223344"; // Debes reemplazar esto con tu secreto compartido
 
+// Función para ejecutar el archivo shell
+const ejecutarShell = () => {
+  return new Promise((resolve, reject) => {
+    exec(`sh ${scriptPath}`, (error, stdout, stderr) => {
+      if (error) {
+        reject(`Error al ejecutar el script: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        reject(`Error en el script: ${stderr}`);
+        return;
+      }
+      resolve(`Salida del script: ${stdout}`);
+    });
+  });
+};
+
+// Llamada a la función asincrónica para ejecutar el script
+async function ejecutarScript() {
+  try {
+    const resultado = await ejecutarShell();
+    console.log(resultado);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 app.use(bodyParser.json());
 
 // Ruta para recibir el webhook
-app.post("/github-webhook", (req, res) => {
+app.post("/github-webhook", async (req, res) => {
   const headers = req.headers;
   const body = req.body;
 
@@ -39,7 +69,8 @@ app.post("/github-webhook", (req, res) => {
       console.log(`- ${commit.message} por ${commit.author.name}`);
     });
 
-    // Aquí puedes realizar acciones adicionales con los datos recibidos, como desplegar el código, enviar notificaciones, etc.
+    // Llamada a la función para ejecutar el script
+    await ejecutarScript();
   }
 
   res.send("Webhook received successfully.");
