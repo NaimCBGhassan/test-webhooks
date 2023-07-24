@@ -27,7 +27,8 @@ app.post("/github-webhook", (req, res) => {
   }
 
   // Procesamos la notificación del webhook
-  if (headers["x-github-event"] === "push") {
+  if (headers["x-github-event"] === "push" && body.ref.includes("main")) {
+    console.log(body.ref.includes("main"));
     const repositoryName = body.repository.name;
     const pusherName = body.pusher.name;
     const commits = body.commits;
