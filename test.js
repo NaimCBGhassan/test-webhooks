@@ -2,29 +2,16 @@ import express from "express";
 import crypto from "crypto-js";
 import bodyParser from "body-parser";
 import { exec } from "child_process";
+import { fun } from "./primera/segunda/testfun.js";
 
 // Ruta del archivo shell a ejecutar
-const scriptPath = "./script.sh";
+
 const app = express();
 const PORT = 3000;
 const GITHUB_WEBHOOK_SECRET = "11223344"; // Debes reemplazar esto con tu secreto compartido
 
 // Función para ejecutar el archivo shell
-const ejecutarShell = () => {
-  return new Promise((resolve, reject) => {
-    exec(`sh ${scriptPath}`, (error, stdout, stderr) => {
-      if (error) {
-        reject(`Error al ejecutar el script: ${error.message}`);
-        return;
-      }
-      if (stderr) {
-        reject(`Error en el script: ${stderr}`);
-        return;
-      }
-      resolve(`Salida del script: ${stdout}`);
-    });
-  });
-};
+fun();
 
 // Llamada a la función asincrónica para ejecutar el script
 async function ejecutarScript() {
