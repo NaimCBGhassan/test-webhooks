@@ -2,16 +2,13 @@ import express from "express";
 import crypto from "crypto-js";
 import bodyParser from "body-parser";
 import { exec } from "child_process";
-import { fun } from "./primera/segunda/testfun.js";
+import { ejecutarShell } from "./primera/segunda/testfun.js";
 
 // Ruta del archivo shell a ejecutar
 
 const app = express();
 const PORT = 3000;
 const GITHUB_WEBHOOK_SECRET = "11223344"; // Debes reemplazar esto con tu secreto compartido
-
-// Función para ejecutar el archivo shell
-fun();
 
 // Llamada a la función asincrónica para ejecutar el script
 async function ejecutarScript() {
