@@ -13,7 +13,7 @@ const GITHUB_WEBHOOK_SECRET = "11223344"; // Debes reemplazar esto con tu secret
 // Llamada a la función asincrónica para ejecutar el script
 async function ejecutarScript() {
   try {
-    const resultado = await ejecutarShell();
+    const resultado = await ejecutarShell("./script.sh");
     console.log(resultado);
   } catch (error) {
     console.error(error);
