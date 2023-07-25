@@ -1,6 +1,6 @@
 import { exec } from "child_process";
 
-export const ejecutarShell = (scriptPah) => {
+export const ejecutarShell = (scriptPath) => {
   return new Promise((resolve, reject) => {
     exec(`sh ${scriptPath}`, (error, stdout, stderr) => {
       if (error) {
