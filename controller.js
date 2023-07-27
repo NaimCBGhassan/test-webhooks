@@ -13,7 +13,7 @@ export const githubWebhook = async ({ body, headers }, res) => {
 
   // Procesamos la notificación del webhook
   if (headers["x-github-event"] === "push" && body.ref.includes("test")) {
-    await runScript(`${__dirname}/script.sh`); // Llamada a la función para ejecutar el script
+    await runScript(`./script.sh`); // Llamada a la función para ejecutar el script
   }
   res.status(200).send("Webhook received successfully.");
 };
