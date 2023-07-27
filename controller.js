@@ -1,5 +1,5 @@
 import crypto from "crypto-js";
-import { runScript } from "../utils/githubIntegration";
+import { runScript } from "./utils.js";
 
 export const githubWebhook = async ({ body, headers }, res) => {
   // Verificamos el secreto compartido (opcional pero recomendado)
