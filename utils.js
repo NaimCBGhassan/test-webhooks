@@ -1,6 +1,7 @@
 import { exec } from "child_process";
 
-export const ejecutarShell = (scriptPath) => {
+// Función para ejecutar el archivo shell
+const runShell = (scriptPath) => {
   return new Promise((resolve, reject) => {
     exec(`sh ${scriptPath}`, (error, stdout, stderr) => {
       if (error) {
@@ -15,3 +16,12 @@ export const ejecutarShell = (scriptPath) => {
     });
   });
 };
+
+// Llamada a la función asincrónica para ejecutar el script
+export async function runScript(scriptPath) {
+  try {
+    await runShell(scriptPath);
+  } catch (error) {
+    console.error(error);
+  }
+}
