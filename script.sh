@@ -1,7 +1,7 @@
 #!/bin/bash
 # Detener los servicios Docker existentes
 cd /home/ubuntu/Veterinaria/ && /usr/bin/docker-compose down 
-cd /home/ubuntu/Veterinaria/ && /usr/bin/docker image prune -a
+#cd /home/ubuntu/Veterinaria/ && /usr/bin/docker image prune -a
 #<<< "TU_CONTRASEÑA_DE_SUDO"
 # Configuración de usuario y contraseña de Git
 export GIT_USERNAME="jpsq"
