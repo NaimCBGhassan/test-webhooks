@@ -3,7 +3,7 @@ import { runScript } from "./utils.js";
 
 export const githubWebhook = async ({ body, headers }, res) => {
   // Verificamos el secreto compartido (opcional pero recomendado)
-  /*   const receivedSignature = headers["x-hub-signature"];
+  const receivedSignature = headers["x-hub-signature"];
   const calculatedSignature = `sha1=${crypto.HmacSHA1(JSON.stringify(body), "11223344").toString(crypto.enc.Hex)}`;
 
   if (receivedSignature !== calculatedSignature) {
@@ -13,7 +13,7 @@ export const githubWebhook = async ({ body, headers }, res) => {
 
   // Procesamos la notificación del webhook
   if (headers["x-github-event"] === "push" && body.ref.includes("test")) {
-  } */
-  await runScript(`./script.sh`); // Llamada a la función para ejecutar el script
+    await runScript(`./script.sh`); // Llamada a la función para ejecutar el script
+  } 
   res.status(200).send("Webhook received successfully.");
 };
