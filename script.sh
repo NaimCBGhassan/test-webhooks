@@ -15,4 +15,4 @@ git pull origin test
 cd /home/ubuntu/Veterinaria/ && /usr/bin/docker-compose up -d --build
 
 #Eliminar imagenes no usadas de docker:
-#/usr/bin/docker image prune -a
+#/usr/bin/docker image prune -a -f
