@@ -1,21 +1,18 @@
 #!/bin/bash
+#Ir a la carpeta del proyecto
+cd /home/ubuntu/Veterinaria/
+
 # Detener los servicios Docker existentes
-cd /home/ubuntu/Veterinaria/ && /usr/bin/docker-compose down 
-#cd /home/ubuntu/Veterinaria/ && /usr/bin/docker image prune -a
-#<<< "TU_CONTRASEÑA_DE_SUDO"
-# Configuración de usuario y contraseña de Git
-export GIT_USERNAME="jpsq"
-export GIT_PASSWORD="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"
-# Configurar el nombre de usuario de Git globalmente
-git config --global user.name "$GIT_USERNAME"
-# Configurar la contraseña de Git globalmente
-git config --global credential.helper "store --file ~/.git-credentials"
-echo -e "https://$GIT_USERNAME:$GIT_PASSWORD@github.com" > ~/.git-credentials
+/usr/bin/docker-compose down 
+
 # Actualizar el repositorio git
-cd /home/ubuntu/Veterinaria/ && git pull origin test 
+git pull origin test 
+
 # Detener los servicios Docker nuevamente (por si acaso)
-cd /home/ubuntu/Veterinaria/ && /usr/bin/docker-compose down
-#<<< "TU_CONTRASEÑA_DE_SUDO"
+/usr/bin/docker-compose down
+
 # Construir y levantar los servicios Docker
 cd /home/ubuntu/Veterinaria/ && /usr/bin/docker-compose up -d --build
-#<<< "TU_CONTRASEÑA_DE_SUDO" 
+
+#Eliminar imagenes no usadas de docker:
+/usr/bin/docker image prune -a
