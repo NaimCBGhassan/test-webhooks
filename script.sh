@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /home/ubuntu/Veterinaria/
+
 # Actualizar el repositorio git
 git pull origin test 
 
