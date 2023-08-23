@@ -1,18 +1,16 @@
 #!/bin/bash
-#Ir a la carpeta del proyecto
-cd /home/ubuntu/Veterinaria/
-
-# Detener los servicios Docker existentes
-/usr/bin/docker-compose down 
 
 # Actualizar el repositorio git
 git pull origin test 
 
-# Detener los servicios Docker nuevamente (por si acaso)
-/usr/bin/docker-compose down
+#Ir a la carpeta del Cliente
+cd /home/ubuntu/Veterinaria/Client
+#Instalo las dependencias
+npm i
+npm run build
 
-# Construir y levantar los servicios Docker
-cd /home/ubuntu/Veterinaria/ && /usr/bin/docker-compose up -d --build
-
-#Eliminar imagenes no usadas de docker:
-/usr/bin/docker image prune -a -f
+#Ir a la carpeta del Cliente
+cd /home/ubuntu/Veterinaria/Server
+#Instalo las dependencias
+npm i
+npm run build
